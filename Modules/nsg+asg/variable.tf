@@ -1,23 +1,35 @@
+# -------------------
+# ASG INPUT
+# -------------------
+variable "asgs" {
+  type = map(object({
+    name                = string
+    resource_group_name = string
+    location            = string
+    tags                = optional(map(string))
+  }))
+}
+
+# -------------------
+# NSG INPUT
+# -------------------
 variable "nsgs" {
   type = map(object({
     name                = string
     resource_group_name = string
     location            = string
-    security_rule = map(object({
+
+    rules = map(object({
       name                       = string
       priority                   = number
       direction                  = string
       access                     = string
       protocol                   = string
-      source_port_range          = string
       destination_port_range     = string
-      source_address_prefix      = string
-      destination_address_prefix = string
-    }))
 
-    # Application Security Groups (ASGs)
-    asgs = optional(map(object({
-      name = string
-    })))
+      # Replace IDs → use list of ASG keys
+      source_asgs      = optional(list(string))
+      destination_asgs = optional(list(string))
+    }))
   }))
 }
