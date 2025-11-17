@@ -6,10 +6,16 @@ variable "networks" {
   type = any
 }
 
-variable "nsgs" {
-  type = any
-}
-
 variable "storage_accounts" {
   type = any
 }
+
+variable "nsgs" {
+  type = map(any)
+}
+
+variable "asgs" {
+  type = map(any)
+}
+
+

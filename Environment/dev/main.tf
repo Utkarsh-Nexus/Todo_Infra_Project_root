@@ -1,6 +1,6 @@
-module "rg"{
-source         = "../../Modules/resource_group"
-resource_group = var.rgs
+module "rg" {
+  source = "../../Modules/resource_group"
+  rgs    = var.rgs
 }
 
 module "vnet" {
@@ -13,9 +13,9 @@ module "storage" {
   storage_accounts = var.storage_accounts
 }
 
+module "asg" {
+  source = "../../Modules/nsg+asg"
+  asgs   = var.asgs
+  nsgs   = var.nsgs
+}
 
-#module "nsg" {
-  #source     = "./modules/nsg"
-  #nsgs       = var.nsgs
-  #subnet_ids = module.vnet.subnet_ids
-#}
